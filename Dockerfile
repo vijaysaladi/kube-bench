@@ -11,8 +11,8 @@ RUN make build && cp kube-bench /go/bin/kube-bench
 
 # Add kubectl to run policies checks
 ARG KUBECTL_VERSION TARGETARCH
-RUN wget -O /usr/local/bin/kubectl "https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/${TARGETARCH}/kubectl"
-RUN wget -O kubectl.sha256 "https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/${TARGETARCH}/kubectl.sha256"
+RUN wget -O /usr/local/bin/kubectl "https://dl.k8s.io/release/v1.26.0/bin/linux/amd64/kubectl"
+RUN wget -O kubectl.sha256 "https://dl.k8s.io/release/v1.26.0/bin/linux/amd64/kubectl.sha256"
 
 # Verify kubectl sha256sum
 RUN /bin/bash -c 'echo "$(<kubectl.sha256)  /usr/local/bin/kubectl" | sha256sum -c -'

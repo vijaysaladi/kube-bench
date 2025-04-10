@@ -9,7 +9,7 @@ groups:
     text: "Worker Node Configuration Files"
     checks:
       - id: 3.1.1
-        text: "Ensure that the kubeconfig file permissions are set to 644 or more restrictive (Manual)"
+        text: "Ensure that the kubeconfig file permissions are set to 644"
         audit: '/bin/sh -c ''if test -e $kubeletkubeconfig; then stat -c permissions=%a $kubeletkubeconfig; fi'' '
         tests:
           test_items:
