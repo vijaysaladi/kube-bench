@@ -1,2 +1,4 @@
 ---
 ## Version-specific settings that override the values in cfg/config.yaml
+kubeletkubeconfig : "/var/lib/kubelet/oke_kubelet_conf.json"
+kubeletconf : "/etc/systemd/system/kubelet.service"
