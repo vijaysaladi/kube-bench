@@ -1,5 +1,5 @@
 FROM golang:1.24.1 AS build
-WORKDIR /go/src/github.com/aquasecurity/kube-bench/
+WORKDIR /go/src/github.com/vijaysaladi/kube-bench/
 COPY makefile makefile
 COPY go.mod go.sum ./
 COPY main.go .
@@ -67,7 +67,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.summary="Aqua security server" \
       org.label-schema.maintainer="admin@aquasec.com" \
       org.label-schema.description="Run the CIS Kubernetes Benchmark tests" \
-      org.label-schema.url="https://github.com/aquasecurity/kube-bench" \
+      org.label-schema.url="https://github.com/vijaysaladi/kube-bench" \
       org.label-schema.vcs-ref=$VCS_REF \
-      org.label-schema.vcs-url="https://github.com/aquasecurity/kube-bench" \
+      org.label-schema.vcs-url="https://github.com/vijaysaladi/kube-bench" \
       org.label-schema.schema-version="1.0"
