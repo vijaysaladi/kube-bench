@@ -13,7 +13,7 @@ groups:
         audit: '/bin/sh -c ''if test -e $kubeletkubeconfig; then stat -c %a $kubeletkubeconfig; fi'' '
         tests:
           test_items:
-            - flag: "permissions"
+            - flag: "value"
               compare:
                 op: "in"
                 value: [600, 644]
@@ -40,7 +40,7 @@ groups:
         audit: '/bin/sh -c ''if test -e $kubeletconf; then stat -c %a $kubeletconf; fi'' '
         tests:
           test_items:
-            - flag: "permissions"
+            - flag: "value"
               compare:
                 op: "in"
                 value: [600, 644]
