@@ -1,31 +1,39 @@
 ---
 controls:
-version: "aks-1.0"
+version: "oke-1.0"
 id: 2
 text: "Control Plane Configuration"
 type: "controlplane"
 groups:
   - id: 2.1
-    text: "Logging"
+    test : "Authentication and Authorization"
     checks:
       - id: 2.1.1
-        text: "Enable audit Logs"
+        test: "Client certificate authentication should not be used for users (Automated)"
         type: "manual"
         remediation: |
-          Azure audit logs are enabled and managed in the Azure portal. To enable log collection for
-          the Kubernetes master components in your AKS cluster, open the Azure portal in a web
-          browser and complete the following steps:
-          1. Select the resource group for your AKS cluster, such as myResourceGroup. Don't
-             select the resource group that contains your individual AKS cluster resources, such
-             as MC_myResourceGroup_myAKSCluster_eastus.
-          2. On the left-hand side, choose Diagnostic settings.
-          3. Select your AKS cluster, such as myAKSCluster, then choose to Add diagnostic setting.
-          4. Enter a name, such as myAKSClusterLogs, then select the option to Send to Log Analytics.
-          5. Select an existing workspace or create a new one. If you create a workspace, provide
-             a workspace name, a resource group, and a location.
-          6. In the list of available logs, select the logs you wish to enable. For this example,
-             enable the kube-audit and kube-audit-admin logs. Common logs include the kube-
-             apiserver, kube-controller-manager, and kube-scheduler. You can return and change
-             the collected logs once Log Analytics workspaces are enabled.
-          7. When ready, select Save to enable collection of the selected logs.
+          Review user access to the cluster and ensure that users are not making use of Kubernetes 
+          client certificate authentication. You can verify the availability of client certificates 
+          in your OKE cluster. Run the following command to verify the availability of client certificates 
+          in your OKE cluster: 
+          
+          kubectl get secrets --namespace kube-system
+          
+          This command lists all the secrets in the kube-system namespace, which includes the client 
+          certificates used for authentication. Look for secrets with names starting with oci- or oke-. 
+          These secrets contain the client certificates. If the command returns secrets with such names, 
+          it indicates that client certificates are available in your OKE cluster.
+
+          Alternative mechanisms provided by Kubernetes such as the use of OIDC should be implemented 
+          in place of client certificates. You can remediate the availability of client certificates in 
+          your OKE cluster.
+        scored: false
+        
+  - id: 2.2
+    text: "Logging"
+    checks:
+      - id: 2.2.1
+        text: "Enable audit Logs"
+        type: "manual"
+        remediation: "No remediation is necessary for this control."
         scored: false
