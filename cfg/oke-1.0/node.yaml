@@ -15,8 +15,8 @@ groups:
           test_items:
             - flag: "permissions"
               compare:
-                op: in
-                value: ["644", "600"]
+                op: "in"
+                value: [600, 644]
         remediation: |
           Run the below command (based on the file location on your system) on the each worker node.
           For example,
@@ -42,8 +42,8 @@ groups:
           test_items:
             - flag: "permissions"
               compare:
-                op: in
-                value: ["644", "600"]
+                op: "in"
+                value: [600, 644]
         remediation: |
           Run the following command (using the config file location identified in the Audit step)
           chmod 644 $kubeletconf
