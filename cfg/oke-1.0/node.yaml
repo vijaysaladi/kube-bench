@@ -9,14 +9,14 @@ groups:
     text: "Worker Node Configuration Files"
     checks:
       - id: 3.1.1
-        text: "Ensure that the kubeconfig file permissions are set to 644"
-        audit: '/bin/sh -c ''if test -e $kubeletkubeconfig; then stat -c %a $kubeletkubeconfig; fi'' '
+        text: "Ensure that the kubeconfig file permissions are set to 644 or more restrictive (Manual). Value = '/bin/sh -c ''if test -e $kubeletkubeconfig; then stat -c permissions=%a $kubeletkubeconfig; fi'' '"
+        audit: '/bin/sh -c ''if test -e $kubeletkubeconfig; then stat -c permissions=%a $kubeletkubeconfig; fi'' '
         tests:
           test_items:
-            - flag: "value"
+            - flag: "permissions"
               compare:
-                op: "in"
-                value: [600, 644]
+                op: bitmask
+                value: "644"
         remediation: |
           Run the below command (based on the file location on your system) on the each worker node.
           For example,
@@ -36,14 +36,14 @@ groups:
         scored: true
 
       - id: 3.1.3
-        text: "Ensure that the kubelet configuration file has permissions set to 644 or more restrictive (Manual)"
-        audit: '/bin/sh -c ''if test -e $kubeletconf; then stat -c %a $kubeletconf; fi'' '
+        text: "Ensure that the kubelet configuration file has permissions set to 644 or more restrictive (Manual). Value = '/bin/sh -c ''if test -e $kubeletconf; then stat -c permissions=%a $kubeletconf; fi'' '"
+        audit: '/bin/sh -c ''if test -e $kubeletconf; then stat -c permissions=%a $kubeletconf; fi'' '
         tests:
           test_items:
-            - flag: "value"
+            - flag: "permissions"
               compare:
-                op: "in"
-                value: [600, 644]
+                op: bitmask
+                value: "644"
         remediation: |
           Run the following command (using the config file location identified in the Audit step)
           chmod 644 $kubeletconf
